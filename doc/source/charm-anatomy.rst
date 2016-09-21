@@ -220,8 +220,8 @@ the **charm.install** event. To do this edit
 
     @reactive.when('charm.installed')
     def configure_foo():
-        with charm.provide_charm_instance() as sdn_charm:
-            sdn_charm.configure_foo()
+        with charm.provide_charm_instance() as new_charm:
+            new_charm.configure_foo()
 
 If configure_foo() should only be run once then the handler can emit a new
 state and the running of configure_foo gated on the state not being present
@@ -232,8 +232,8 @@ e.g.
     @reactive.when_not('foo.configured')
     @reactive.when('charm.installed')
     def configure_foo():
-        with charm.provide_charm_instance() as sdn_charm:
-            sdn_charm.configure_foo()
+        with charm.provide_charm_instance() as new_charm:
+            new_charm.configure_foo()
         reactive.set_state('foo.configured')
 
 
@@ -402,8 +402,8 @@ the **configure_neutron_plugin** method in the charm class.
 
     @reactive.when('neutron-plugin.connected')
     def configure_neutron_plugin(neutron_plugin):
-        with charm.provide_charm_instance() as sdn_charm:
-            sdn_charm.configure_neutron_plugin(neutron_plugin)
+        with charm.provide_charm_instance() as new_charm:
+            new_charm.configure_neutron_plugin(neutron_plugin)
 
 In the charm class the instance of the interface is used to update the
 principle
